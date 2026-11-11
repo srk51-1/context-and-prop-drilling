@@ -1,6 +1,9 @@
+import { useCity } from "../context/CityContext.jsx";
+
 import CurrentConditions from "./CurrentConditions.jsx";
 import HourlyStrip from "./HourlyStrip.jsx";
-function TodayPage({ city }) {
+function TodayPage() {
+  const { city } = useCity();
   return (
     <section className="page">
       <h2 className="page-title">

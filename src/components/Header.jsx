@@ -1,3 +1,6 @@
+import { useCity } from "../context/CityContext.jsx";
+import { useUnits } from "../context/UnitsContext.jsx";
+
 import { NavLink } from "react-router";
 
 import CityPicker from "./CityPicker.jsx";
@@ -8,11 +11,18 @@ function navClass({ isActive }) {
   return isActive ? "nav-link nav-on" : "nav-link";
 }
 
-function Header({ cityId, onCityChange }) {
+function Header() {
+  const { city } = useCity();
+  const { units } = useUnits();
   return (
     <header className="header">
       <div className="header-top">
-        <h1 className="header-title">Weather Desk</h1>
+        <div>
+          <h1 className="header-title">Weather Desk</h1>
+          <p className="header-meta">
+            {city.name} · °{units}
+          </p>
+        </div>
         <Clock />
       </div>
       <div className="header-bar">
@@ -25,7 +35,7 @@ function Header({ cityId, onCityChange }) {
           </NavLink>
         </nav>
         <div className="header-controls">
-          <CityPicker cityId={cityId} onCityChange={onCityChange} />
+          <CityPicker />
           <UnitsToggle />
         </div>
       </div>
